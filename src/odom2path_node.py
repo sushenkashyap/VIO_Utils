@@ -34,13 +34,13 @@ def callback(data):
     pose.pose.orientation.w = float(data.pose.pose.orientation.w)
 
 #To avoid repeating the values, it is found that the received values are differents
-    if (xAnt != pose.pose.position.x and yAnt != pose.pose.position.y):
+    #if (xAnt != pose.pose.position.x and yAnt != pose.pose.position.y):
         #Set a atributes of the msg
-        pose.header.seq = path.header.seq + 1
-        path.header.frame_id="world"
-        path.header.stamp=rospy.Time.now()
-        pose.header.stamp = path.header.stamp
-        path.poses.append(pose)
+    pose.header.seq = path.header.seq + 1
+    path.header.frame_id="world"
+    path.header.stamp=rospy.Time.now()
+    pose.header.stamp = path.header.stamp
+    path.poses.append(pose)
         #Published the msg
 
     #cont=cont+1

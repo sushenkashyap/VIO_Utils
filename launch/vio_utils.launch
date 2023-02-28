@@ -1,6 +1,7 @@
 <launch>
 	<arg name="est_odom_topic"/>
 	<arg name="gt_topic"/>
+	<arg name="source_list" />
 		
 	<node pkg="utils" type="odom2path_node.py" name="est_path_node" args="$(arg est_odom_topic)"/>
 	
@@ -9,5 +10,11 @@
 	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find utils)/rviz/path_viz.rviz"/>
 	
 	<node pkg="utils" type="error_node.py" name="error_calc_node" args="$(arg est_odom_topic) $(arg gt_topic)"/>
+	
+	<include file="$(find cpu_monitor)/launch/cpu_monitor.launch">
+		<arg name="source_list" value="$(arg source_list)"/>
+		<arg name="save_to_csv" value="true" />
+		<arg name="poll_period" value="1.0" />
+	</include>
 	
 </launch>
